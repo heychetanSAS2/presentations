@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Presentations by Chetan.">
+  <title>Chetan — Presentations</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #000000;
+      --surface: #0b0d0b;
+      --ink: #e9eee9;
+      --ink-dim: #9aa39a;
+      --line: #4a554c;
+      --green: #5ce060;
+      --paper: #ecefea;
+      --paper-ink: #0b0d0a;
+      --font-display: "Space Grotesk", sans-serif;
+      --font-body: "Inter", sans-serif;
+      --font-mono: "JetBrains Mono", monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      color-scheme: dark;
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--font-body);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    a:focus-visible {
+      outline: 3px solid var(--green);
+      outline-offset: 5px;
+    }
+
+    .shell {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: clamp(48px, 8vw, 104px) 0 72px;
+    }
+
+    header {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: end;
+      gap: 32px;
+      padding-bottom: clamp(36px, 6vw, 72px);
+      border-bottom: 1px solid var(--line);
+      animation: arrive 620ms cubic-bezier(.22, 1, .36, 1) both;
+    }
+
+    .label {
+      margin: 0 0 14px;
+      color: var(--green);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 780px;
+      margin: 0;
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 600;
+      letter-spacing: -0.035em;
+      line-height: 0.98;
+      text-wrap: balance;
+    }
+
+    .count {
+      margin: 0;
+      color: var(--ink-dim);
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      white-space: nowrap;
+    }
+
+    .library {
+      display: grid;
+      gap: clamp(28px, 5vw, 54px);
+      padding-top: clamp(36px, 6vw, 72px);
+    }
+
+    .talk {
+      display: grid;
+      grid-template-columns: minmax(0, 1.45fr) minmax(280px, 0.75fr);
+      min-height: 350px;
+      color: var(--ink);
+      text-decoration: none;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      overflow: hidden;
+      animation: arrive 680ms cubic-bezier(.22, 1, .36, 1) both;
+    }
+
+    .talk:nth-child(2) {
+      animation-delay: 100ms;
+    }
+
+    .visual {
+      position: relative;
+      min-height: 300px;
+      overflow: hidden;
+      background: #111;
+    }
+
+    .visual img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      transition: transform 500ms cubic-bezier(.22, 1, .36, 1);
+    }
+
+    .talk--sre .visual img {
+      object-position: center 28%;
+    }
+
+    .paper {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 32px;
+      padding: clamp(28px, 4vw, 48px);
+      background: var(--paper);
+      color: var(--paper-ink);
+    }
+
+    .meta {
+      margin: 0 0 18px;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      margin: 0;
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3.5vw, 3rem);
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      text-wrap: balance;
+    }
+
+    .open {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(11, 13, 10, 0.24);
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .arrow {
+      color: var(--paper-ink);
+      font-size: 1.5rem;
+      line-height: 1;
+      transition: transform 300ms cubic-bezier(.22, 1, .36, 1);
+    }
+
+    .talk:hover .visual img {
+      transform: scale(1.025);
+    }
+
+    .talk:hover .arrow {
+      transform: translateX(6px);
+    }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      margin-top: clamp(44px, 7vw, 80px);
+      padding-top: 22px;
+      border-top: 1px solid var(--line);
+      color: var(--ink-dim);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+    }
+
+    @keyframes arrive {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 780px) {
+      .shell {
+        width: min(100% - 24px, 620px);
+        padding-top: 36px;
+      }
+
+      header {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+
+      .talk {
+        grid-template-columns: 1fr;
+      }
+
+      .visual {
+        min-height: 0;
+        aspect-ratio: 16 / 9;
+      }
+
+      footer {
+        flex-direction: column;
+        gap: 6px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header>
+      <div>
+        <p class="label">Chetan / Talks</p>
+        <h1>Presentations</h1>
+      </div>
+      <p class="count">02 talks</p>
+    </header>
+
+    <section class="library" aria-label="Presentation library">
+      <a class="talk" href="harness-engineering/" aria-label="Open The busy person's intro to Harness Engineering">
+        <div class="visual">
+          <img src="assets/harness-engineering.png" alt="Opening slide for Harness Engineering">
+        </div>
+        <div class="paper">
+          <div>
+            <p class="meta">Harness Engineering · 29 slides</p>
+            <h2>The busy person&apos;s intro to Harness Engineering</h2>
+          </div>
+          <div class="open">
+            <span>Open presentation</span>
+            <span class="arrow" aria-hidden="true">→</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="talk talk--sre" href="sre-agent/" aria-label="Open El Agénte, the SAS SRE AI Platform">
+        <div class="visual">
+          <img src="assets/sre-agent.png" alt="Opening slide for El Agénte">
+        </div>
+        <div class="paper">
+          <div>
+            <p class="meta">Site Reliability Engineering · 13 slides</p>
+            <h2>El Agénte: The SAS SRE AI Platform</h2>
+          </div>
+          <div class="open">
+            <span>Open presentation</span>
+            <span class="arrow" aria-hidden="true">→</span>
+          </div>
+        </div>
+      </a>
+    </section>
+
+    <footer>
+      <span>Built for the room, available on the web.</span>
+      <span>2026</span>
+    </footer>
+  </main>
+</body>
+</html>
