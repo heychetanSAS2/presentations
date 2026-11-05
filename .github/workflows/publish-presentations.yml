@@ -34,6 +34,7 @@ jobs:
           cp -R assets _site/assets
           cp -R harness-engineering _site/harness-engineering
           cp -R evals _site/evals
+          cp -R evals-deep-dive _site/evals-deep-dive
           cp -R sre-agent _site/sre-agent
           touch _site/.nojekyll
 
