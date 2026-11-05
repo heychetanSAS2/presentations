@@ -1108,13 +1108,12 @@ a.peek:hover,a.peek:focus-visible{border-bottom-style:solid}
      ============================================================ -->
 <section class="slide" data-title="Part 3: The Call That Felt Fine" data-slug="call-that-felt-fine">
   <div class="inner">
-    <span class="kicker pen">Part 3 · How we build evals, with one real SAS Holidays call</span>
+    <span class="kicker pen">Part 3 · How we build evals</span>
     <h2>A call that felt fine <span class="hl hl-anim">still failed the customer</span></h2>
     <div class="cols visual-hero">
       <div class="stack">
-        <p class="lede" data-step>I called our voice agent as <strong>Maja</strong>, a EuroBonus member: two adults, children of six and nine, somewhere warm in February. It felt natural.</p>
-        <p class="lede" data-step>Then: <em>"How many EuroBonus points would we get?"</em> The voice: <em>"I don't see any EuroBonus points."</em> Every hotel card on screen showed <strong class="pen">+14,586 points for 4</strong>.</p>
-        <p class="lede" data-step>Our checks raised three alarms. <strong>Two were wrong.</strong> The worst fault raised none.</p>
+        <p class="lede" data-step>Teams in high-stakes environments build their agent's <strong>evals first</strong>. The rest of us can learn a lot from how they do it.</p>
+        <p class="lede" data-step>We will follow <strong>one real call</strong> to our voice agent through every step. On the right: what our checks said, and what the customer saw.</p>
       </div>
       <div class="stage-card" data-step>
         <svg class="scene" viewBox="0 0 640 340" aria-label="The checks' verdicts next to what the customer saw on screen">
@@ -1167,11 +1166,11 @@ a.peek:hover,a.peek:focus-visible{border-bottom-style:solid}
     <h2>Evidence, oversight, <span class="hl hl-anim">data under control</span></h2>
     <div class="cols visual-hero">
       <div class="stack">
-        <p class="lede" data-step>An airline holiday planner sells packages under package-travel rules, holds EuroBonus profiles under GDPR, and speaks for the SAS brand.</p>
+        <p class="lede" data-step>AI teams in regulated industries usually face three requirements. All three should be true for any agent.</p>
         <ul class="marks">
-          <li data-step><span class="n">1</span><span><strong>Evidence before launch:</strong> every test run kept with its scores and cost, ready for the EA Board.</span></li>
-          <li data-step><span class="n">2</span><span><strong>Oversight after launch:</strong> checks and a guardrail on every real call.</span></li>
-          <li data-step><span class="n">3</span><span><strong>Control over data:</strong> traces stay in SAS's own Azure, the way banks self-host Langfuse.</span></li>
+          <li data-step><span class="n">1</span><span><strong>Evidence before launch:</strong> show the agent meets the quality bar before customers see it.</span></li>
+          <li data-step><span class="n">2</span><span><strong>Oversight after launch:</strong> keep watching what the agent does once it is live.</span></li>
+          <li data-step><span class="n">3</span><span><strong>Control over data:</strong> decide where traces and customer data live.</span></li>
         </ul>
       </div>
       <div class="stage-card" data-step>
@@ -1216,7 +1215,7 @@ a.peek:hover,a.peek:focus-visible{border-bottom-style:solid}
   <div class="inner">
     <span class="kicker">The approach</span>
     <h2>Run the loop <span class="hl hl-anim">before any customer calls</span></h2>
-    <p class="lede" data-step style="max-width:84ch;margin-bottom:10px">Most teams enter the loop in production. Regulated teams <strong>trace test runs, build datasets, run experiments and evaluate</strong> until the agent meets the bar — only then do they monitor live traffic. We have run about 300 scripted conversations against the real voice since 18 October.</p>
+    <p class="lede" data-step style="max-width:84ch;margin-bottom:10px">The loop: <strong>trace, monitor, build datasets, run experiments, evaluate</strong> — then repeat. Many teams enter it in production. Regulated teams run most of it <strong>before</strong>: they trace offline runs, build datasets, experiment and evaluate until the agent meets the quality bar. Only then do they monitor live traffic.</p>
     <div class="stage-card" data-step>
       <svg class="scene" viewBox="0 0 920 310" aria-label="The AI engineering loop split into an offline half before launch and an online half after launch">
         <rect x="74" y="42" width="772" height="196" rx="96" fill="none" stroke="#DCDCDC" stroke-width="12"/>
@@ -1274,14 +1273,14 @@ a.peek:hover,a.peek:focus-visible{border-bottom-style:solid}
 <section class="slide" data-title="Step 1: Set Up Tracing" data-slug="step-1-tracing">
   <div class="inner">
     <span class="kicker">Step 1 of 8 · Tracing</span>
-    <h2>Trace every call — <span class="hl hl-anim">and the bug becomes evidence</span></h2>
+    <h2>Trace every run — <span class="hl hl-anim">it is your evidence</span></h2>
     <div class="cols visual-hero">
       <div class="stack">
-        <p class="lede" data-step>Record the prompt version, model, tools, retrieved context and cost on every run — before anyone outside the team uses the agent.</p>
+        <p class="lede" data-step>Add tracing <strong>before anyone outside the team</strong> uses the agent.</p>
         <ul class="marks">
-          <li data-step><span class="n">1</span><span><strong>One call, one tree:</strong> Maja's call — 9 turns, 3:01, 6.38 kr.</span></li>
-          <li data-step><span class="n">2</span><span><strong>Retrieved context:</strong> the 8 hotels the search returned. No points field. That is the bug.</span></li>
-          <li data-step><span class="n">3</span><span><strong>Versions on every call:</strong> gpt-realtime-2.1 · prompt a7f0fac7 · app c3f7b0e.</span></li>
+          <li data-step><span class="n">1</span><span><strong>Insight and evidence:</strong> a trace shows what happened in a run, and proves what the agent did.</span></li>
+          <li data-step><span class="n">2</span><span><strong>Record on every run:</strong> prompt version, model, tool calls, retrieved context and any human approval.</span></li>
+          <li data-step><span class="n">3</span><span><strong>Decide early where traces live:</strong> self-hosted, or a cloud region that meets your rules.</span></li>
         </ul>
       </div>
       <div class="stage-card" data-step>
@@ -1339,12 +1338,11 @@ a.peek:hover,a.peek:focus-visible{border-bottom-style:solid}
     <h2>Run realistic inputs <span class="hl hl-anim">before you know the answers</span></h2>
     <div class="cols visual-hero">
       <div class="stack">
-        <p class="lede" data-step>Each run gives a trace to learn from. No expected answers needed yet.</p>
+        <p class="lede" data-step>Run examples that roughly match what production will see. Each run gives a trace to learn from — <strong>no expected answers yet</strong>.</p>
         <ul class="marks">
-          <li data-step><span class="n">1</span><span><strong>Synthetic:</strong> 56 scripted conversations, written with the people who know the trips.</span></li>
-          <li data-step><span class="n">2</span><span><strong>Expert edge cases:</strong> Caroline's no-go list — "Bali in March", a competitor, a prompt injection.</span></li>
-          <li data-step><span class="n">3</span><span><strong>Historical:</strong> real test calls, replayed line by line.</span></li>
-          <li data-step><span class="n">4</span><span><strong>Shadow runs:</strong> next — customer testing before go-live.</span></li>
+          <li data-step><span class="n">1</span><span><strong>Synthetic examples:</strong> generate typical requests and their variations; experts add cases they know.</span></li>
+          <li data-step><span class="n">2</span><span><strong>Historical data:</strong> run the agent on cases your team has already decided.</span></li>
+          <li data-step><span class="n">3</span><span><strong>Shadow runs:</strong> process live cases next to the current workflow, without acting on anything.</span></li>
         </ul>
       </div>
       <div class="stage-card" data-step>
@@ -1394,11 +1392,11 @@ a.peek:hover,a.peek:focus-visible{border-bottom-style:solid}
     <h2>Experts read traces — <span class="hl hl-anim">failure modes emerge</span></h2>
     <div class="cols visual-hero">
       <div class="stack">
-        <p class="lede" data-step>I reviewed the call as the expert: pass or fail, and one note per turn — <strong>what I saw, not why</strong>.</p>
+        <p class="lede" data-step>Domain experts read the traces. For each one, they note <strong>the first thing that went wrong</strong>.</p>
         <ul class="marks">
-          <li data-step><span class="n">1</span><span><strong>Claude grouped the notes</strong>; I approved two failure modes. Nobody invented categories in advance.</span></li>
-          <li data-step><span class="n">2</span><span><strong>Fix now:</strong> the points were a missing spec — the voice never got the figure.</span></li>
-          <li data-step><span class="n">3</span><span><strong>Evaluate:</strong> the repeats keep coming back in new words.</span></li>
+          <li data-step><span class="n">1</span><span><strong>Group the notes into failure modes.</strong> This is error analysis.</span></li>
+          <li data-step><span class="n">2</span><span><strong>Fix right away</strong> what needs more specification, such as a missing rule in the prompt.</span></li>
+          <li data-step><span class="n">3</span><span><strong>Evaluate systematically</strong> the failures that keep coming back.</span></li>
         </ul>
       </div>
       <div class="stage-card" data-step>
@@ -1457,11 +1455,11 @@ a.peek:hover,a.peek:focus-visible{border-bottom-style:solid}
     <h2>Failure modes and compliance <span class="hl hl-anim">become checks</span></h2>
     <div class="cols visual-hero">
       <div class="stack">
-        <p class="lede" data-step>For each, ask: <strong>what exact pass-or-fail rule proves it happened</strong> — and can code check it, or does it need judgement?</p>
+        <p class="lede" data-step>What you evaluate comes from <strong>two places</strong>.</p>
         <ul class="marks">
-          <li data-step><span class="n">1</span><span><strong>Code first:</strong> a number said or not, a competitor named or not.</span></li>
-          <li data-step><span class="n">2</span><span><strong>LLM judge only for judgement:</strong> "did it invent a fact?"</span></li>
-          <li data-step><span class="n">3</span><span><strong>No generic "helpfulness":</strong> eight scores built from our own rules.</span></li>
+          <li data-step><span class="n">1</span><span><strong>Failure modes:</strong> recurring failures become quality evaluators. Generic metrics like "helpfulness" rarely match how your agent fails.</span></li>
+          <li data-step><span class="n">2</span><span><strong>Compliance:</strong> agree with compliance what the agent must never do, and turn each rule into an evaluator.</span></li>
+          <li data-step><span class="n">3</span><span><strong>Code check first;</strong> an LLM judge only for what needs judgement.</span></li>
         </ul>
       </div>
       <div class="stage-card" data-step>
@@ -1503,56 +1501,6 @@ a.peek:hover,a.peek:focus-visible{border-bottom-style:solid}
 </section>
 
 <!-- ============================================================
-     SLIDE 18 · EVALUATORS FAIL TOO
-     ============================================================ -->
-<section class="slide" data-title="Who Checks the Checks?" data-slug="checks-fail-too">
-  <div class="inner">
-    <span class="kicker pen">Before a check may block anything</span>
-    <h2>Who checks <span class="hl hl-anim">the checks?</span></h2>
-    <div class="cols visual-hero">
-      <div class="stack">
-        <p class="lede" data-step>We put each check next to the expert's verdict. Four of them disagreed.</p>
-        <ul class="marks">
-          <li data-step><span class="n">1</span><span><strong>Repeat check was blind:</strong> it only knew "Nice" or "Okay". Fixed, then run on 615 past turns: <strong>34 new catches, all real, none lost</strong>.</span></li>
-          <li data-step><span class="n">2</span><span><strong>Points check too literal:</strong> it failed "about 11,934 points for all four of you".</span></li>
-          <li data-step><span class="n">3</span><span><strong>Rule:</strong> calibrate each check against expert verdicts first.</span></li>
-        </ul>
-      </div>
-      <div class="stage-card" data-step>
-        <svg class="scene" viewBox="0 0 640 340" aria-label="Four checks compared with the expert's verdict on the same call">
-          <rect x="14" y="14" width="612" height="30" rx="8" fill="#2A2A28" stroke="#111" stroke-width="1.6"/>
-          <text x="30" y="34" font-family="JetBrains Mono" font-size="11" font-weight="700" fill="#F5C64A">CHECK</text>
-          <text x="330" y="34" text-anchor="middle" font-family="JetBrains Mono" font-size="11" font-weight="700" fill="#F5C64A">CHECK SAID</text>
-          <text x="430" y="34" text-anchor="middle" font-family="JetBrains Mono" font-size="11" font-weight="700" fill="#F5C64A">EXPERT</text>
-          <text x="610" y="34" text-anchor="end" font-family="JetBrains Mono" font-size="11" font-weight="700" fill="#F5C64A">VERDICT</text>
-          <g font-family="Karla, 'Segoe UI', sans-serif" font-size="11.5" font-weight="700" fill="#111">
-            <rect x="14" y="52" width="612" height="56" rx="8" fill="#fff" stroke="#111" stroke-width="1.5"/>
-            <text x="26" y="74" font-weight="800">competitor</text><text x="26" y="94" font-size="10.5" fill="#3A3A3A">note-taker wrote "Wing" for Ving</text>
-            <text x="330" y="84" text-anchor="middle" fill="#D2352A" font-weight="800">✗ fail</text><text x="430" y="84" text-anchor="middle" fill="#5E7A0B" font-weight="800">✓ pass</text>
-            <rect x="14" y="116" width="612" height="56" rx="8" fill="#fff" stroke="#111" stroke-width="1.5"/>
-            <text x="26" y="138" font-weight="800">silence</text><text x="26" y="158" font-size="10.5" fill="#3A3A3A">6.4 s while hotels landed on screen</text>
-            <text x="330" y="148" text-anchor="middle" fill="#D2352A" font-weight="800">✗ fail</text><text x="430" y="148" text-anchor="middle" fill="#5E7A0B" font-weight="800">✓ pass</text>
-            <rect x="14" y="180" width="612" height="56" rx="8" fill="#fff" stroke="#111" stroke-width="1.5"/>
-            <text x="26" y="202" font-weight="800">repeats</text><text x="26" y="222" font-size="10.5" fill="#3A3A3A">"Gran Canaria it is… Gran Canaria sounds good"</text>
-            <text x="330" y="212" text-anchor="middle" fill="#5E7A0B" font-weight="800">✓ pass</text><text x="430" y="212" text-anchor="middle" fill="#D2352A" font-weight="800">✗ fail</text>
-            <rect x="14" y="244" width="612" height="56" rx="8" fill="#fff" stroke="#111" stroke-width="1.5"/>
-            <text x="26" y="266" font-weight="800">points given</text><text x="26" y="286" font-size="10.5" fill="#3A3A3A">"about 11,934 points for all four of you"</text>
-            <text x="330" y="276" text-anchor="middle" fill="#D2352A" font-weight="800">✗ fail</text><text x="430" y="276" text-anchor="middle" fill="#5E7A0B" font-weight="800">✓ pass</text>
-          </g>
-          <g font-family="JetBrains Mono" font-size="10" font-weight="700">
-            <rect x="502" y="70" width="112" height="22" rx="11" fill="#FFD3CE" stroke="#D2352A" stroke-width="1.4"/><text x="558" y="85" text-anchor="middle" fill="#9E241B">false alarm</text>
-            <rect x="502" y="134" width="112" height="22" rx="11" fill="#FFD3CE" stroke="#D2352A" stroke-width="1.4"/><text x="558" y="149" text-anchor="middle" fill="#9E241B">false alarm</text>
-            <rect x="502" y="198" width="112" height="22" rx="11" fill="#CFF844" stroke="#111" stroke-width="1.4" class="anim-safe"/><text x="558" y="213" text-anchor="middle" fill="#111">missed → fixed</text>
-            <rect x="502" y="262" width="112" height="22" rx="11" fill="#FBE7CC" stroke="#E58A2E" stroke-width="1.4"/><text x="558" y="277" text-anchor="middle" fill="#111">too literal</text>
-          </g>
-          <text x="320" y="326" text-anchor="middle" font-family="Caveat, 'Segoe Script', cursive" font-size="19" font-weight="700" fill="#9E241B">a check you can't trust is worse than no check</text>
-        </svg>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
      SLIDE 19 · STEP 5: GROUND TRUTH DATASET
      ============================================================ -->
 <section class="slide" data-title="Step 5: Build a Ground Truth Dataset" data-slug="step-5-ground-truth">
@@ -1562,10 +1510,10 @@ a.peek:hover,a.peek:focus-visible{border-bottom-style:solid}
     <div class="cols visual-hero">
       <div class="stack">
         <ul class="marks">
-          <li data-step><span class="n">1</span><span><strong>Five datasets:</strong> must-never-break 16 · still-to-win 38 · red-team 6 · guardrail-lines 10 · reviewed-calls 2.</span></li>
-          <li data-step><span class="n">2</span><span><strong>Every item:</strong> the customer's lines, the rule that judges the answer, where it came from.</span></li>
-          <li data-step><span class="n">3</span><span><strong>Where experts disagree:</strong> may the voice name Ving and TUI? Should it give a total for four? One meeting, one guideline.</span></li>
-          <li data-step><span class="n">4</span><span><strong>Next:</strong> two of Caroline's experts label the same 30 turns, and we measure how often they agree.</span></li>
+          <li data-step><span class="n">1</span><span><strong>With the criteria in place,</strong> build the dataset together with your domain experts.</span></li>
+          <li data-step><span class="n">2</span><span><strong>Cover three kinds of case:</strong> typical inputs, cases that could go wrong — your failure modes — and one for each compliance limit, each with how the agent should handle it.</span></li>
+          <li data-step><span class="n">3</span><span><strong>Experts disagree more than teams expect:</strong> let them review each other's work, agree in one room, and write the missing rule into the guidelines.</span></li>
+          <li data-step><span class="n">4</span><span><strong>Measure agreement</strong> (inter-rater reliability): the more experts disagree on a case, the harder it is for the agent.</span></li>
         </ul>
       </div>
       <div class="stage-card" data-step>
@@ -1603,11 +1551,12 @@ a.peek:hover,a.peek:focus-visible{border-bottom-style:solid}
     <h2>Baseline, change one thing, <span class="hl hl-anim">compare</span></h2>
     <div class="cols visual-hero">
       <div class="stack">
-        <p class="lede" data-step>Run the dataset as a baseline. Fix. Rerun. Compare item by item — decide from the examples, not one average.</p>
+        <p class="lede" data-step>Run the dataset as an experiment and record the scores as your <strong>baseline</strong>.</p>
         <ul class="marks">
-          <li data-step><span class="n">1</span><span><strong>One change per failure mode:</strong> each hotel line the voice reads now carries the card's points; after a lookup it may not react again in any words.</span></li>
-          <li data-step><span class="n">2</span><span><strong>Honest caveat:</strong> 3 runs is a hint. We trust a difference at 5 runs each, same day.</span></li>
-          <li data-step><span class="n">3</span><span><strong>Next:</strong> a held-out set, so we don't tune to our own tests.</span></li>
+          <li data-step><span class="n">1</span><span><strong>Review the failed cases.</strong></span></li>
+          <li data-step><span class="n">2</span><span><strong>Improve the agent:</strong> its context, tool calls or prompts.</span></li>
+          <li data-step><span class="n">3</span><span><strong>Rerun and compare</strong> with the previous run.</span></li>
+          <li data-step><span class="n">4</span><span><strong>Keep a held-out test set,</strong> so you don't overfit while improving.</span></li>
         </ul>
       </div>
       <div class="stage-card" data-step>
@@ -1649,11 +1598,11 @@ a.peek:hover,a.peek:focus-visible{border-bottom-style:solid}
     <h2>Keep the checks <span class="hl hl-anim">running on every live call</span></h2>
     <div class="cols visual-hero">
       <div class="stack">
+        <p class="lede" data-step>Once you are happy with the results, decide which evaluators <strong>also run in production</strong>.</p>
         <ul class="marks">
-          <li data-step><span class="n">1</span><span><strong>Every call:</strong> 13 rules when it ends, and the guardrail on every customer line.</span></li>
-          <li data-step><span class="n">2</span><span><strong>Sampled:</strong> the Claude judge reads 1 call in 10, about 0.30 kr each.</span></li>
-          <li data-step><span class="n">3</span><span><strong>Explicit feedback:</strong> thumbs up or down with a note, per turn.</span></li>
-          <li data-step><span class="n">4</span><span><strong>Signs of trouble:</strong> a customer who calls back within 30 minutes — the first call didn't finish the job.</span></li>
+          <li data-step><span class="n">1</span><span><strong>Compliance evaluators</strong> belong on every trace.</span></li>
+          <li data-step><span class="n">2</span><span><strong>Quality evaluators</strong> you want to keep watching live.</span></li>
+          <li data-step><span class="n">3</span><span><strong>Explicit feedback,</strong> and signs of trouble: a user asking for a person, or correcting the agent.</span></li>
         </ul>
       </div>
       <div class="stage-card" data-step>
@@ -1700,11 +1649,12 @@ a.peek:hover,a.peek:focus-visible{border-bottom-style:solid}
     <h2>Go live with humans <span class="hl hl-anim">where the risk is</span></h2>
     <div class="cols visual-hero">
       <div class="stack">
+        <p class="lede" data-step>Go live with humans in the loop, as much as the risk requires — <strong>then keep running the loop</strong>.</p>
         <ul class="marks">
-          <li data-step><span class="n">1</span><span><strong>Approval built in:</strong> the voice never books. The customer confirms the price on the SAS booking page.</span></li>
-          <li data-step><span class="n">2</span><span><strong>Review by risk:</strong> a price or a points figure deserves more review than a weather question.</span></li>
-          <li data-step><span class="n">3</span><span><strong>Automate what works:</strong> places and family hotels, yes. Family activities, not yet.</span></li>
-          <li data-step><span class="n">4</span><span><strong>Rerun the dataset before every release:</strong> the release gate is our next build.</span></li>
+          <li data-step><span class="n">1</span><span><strong>Escalate a little too often at launch:</strong> a handover costs minutes, a wrong answer costs more.</span></li>
+          <li data-step><span class="n">2</span><span><strong>Review shrinks as evidence grows:</strong> supervised, then sampled, then exceptions only.</span></li>
+          <li data-step><span class="n">3</span><span><strong>Match review to risk,</strong> and automate the categories that score well.</span></li>
+          <li data-step><span class="n">4</span><span><strong>Rerun the dataset before every release.</strong></span></li>
         </ul>
       </div>
       <div class="stage-card" data-step>
@@ -1752,11 +1702,12 @@ a.peek:hover,a.peek:focus-visible{border-bottom-style:solid}
     <h2>Start with one workflow — <span class="hl hl-anim">then let's open the app</span></h2>
     <div class="cols visual-hero">
       <div class="stack">
+        <p class="lede" data-step>Most of the work happens <strong>before launch</strong>.</p>
         <ul class="marks">
-          <li data-step><span class="n">1</span><span><strong>Trace from the first test call,</strong> with versions and cost.</span></li>
-          <li data-step><span class="n">2</span><span><strong>Learn how it fails:</strong> expert notes, then failure modes.</span></li>
-          <li data-step><span class="n">3</span><span><strong>Agree with compliance</strong> what must never happen, and test against a dataset your experts trust.</span></li>
-          <li data-step><span class="n">4</span><span><strong>Up next:</strong> Maja's call, live, through every screen.</span></li>
+          <li data-step><span class="n">1</span><span><strong>Trace from the start.</strong></span></li>
+          <li data-step><span class="n">2</span><span><strong>Learn how the agent fails.</strong></span></li>
+          <li data-step><span class="n">3</span><span><strong>Agree with compliance what to evaluate,</strong> and test against a ground truth your experts trust.</span></li>
+          <li data-step><span class="n">4</span><span><strong>Start with one workflow</strong> with clear rules and a team that already reviews the work by hand.</span></li>
         </ul>
       </div>
       <div class="stage-card" data-step>
@@ -1859,7 +1810,7 @@ a.peek:hover,a.peek:focus-visible{border-bottom-style:solid}
 <footer class="chrome-bottom">
   <svg id="rail" aria-hidden="true"></svg>
   <div class="legendline">
-    <span class="where" id="railLabel">1 of 24 — opening</span>
+    <span class="where" id="railLabel">1 of 23 — opening</span>
     <span class="keys">→ next · ← back · G map · T timer · F full screen</span>
   </div>
 </footer>
